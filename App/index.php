@@ -8,15 +8,14 @@
 <?php
 
 use App\Challenges\Challenge;
-use App\Challenges\EntryOutput;
+use App\Challenges\Challenge1000;
 
 require __DIR__."/../vendor/autoload.php";
 
-$teste = new Challenge('Titulo');
+$php1000 = new Challenge1000('Hello World!');
 
-$teste->entriesOutputs->addEntries("1", "abc", "20");
-$teste->entriesOutputs->addOutputs(1, 50, 30);
+$php1000->entriesOutputs->addEntries('');
+$php1000->entriesOutputs->addOutputs('Hello World!');
 
-$teste->getChallengeInfo();
-$teste->setUserOutput(1);
-echo $teste->checkUserOutput("1");
+$php1000->getChallengeInfo();
+echo $php1000->checkUserOutput('', $php1000->main());

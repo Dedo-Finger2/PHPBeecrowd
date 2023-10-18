@@ -5,7 +5,7 @@ namespace App\Challenges;
 /**
  * Classe de desafios
  */
-class Challenge
+abstract class Challenge
 {
     private static int $CHALLENGENUMBER = 1000;
 
@@ -84,10 +84,10 @@ class Challenge
      * @param mixed $userEntry Valor de entrada do usuário
      * @return string Indicação se o usuário concluiu o desafio ou não
      */
-    public function checkUserOutput(mixed $userEntry): string
+    public function checkUserOutput(mixed $userEntry, mixed $userOutput): string
     {
         foreach ($this->entriesOutputs->getEntriesOutputs() as $entry => $output) {
-            if ($this->userOutput == $output && $userEntry == $entry) {
+            if ($userOutput == $output && $userEntry == $entry) {
                 return "✅ Passed";
             }
         }
