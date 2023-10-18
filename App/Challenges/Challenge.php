@@ -5,29 +5,29 @@ namespace App\Challenges;
 class Challenge
 {
     private static int $CHALLENGENUMBER = 1000;
+
     protected string $challengeTitle;
-    protected array $entryAndOutput;
     protected mixed $userOutput;
+    public EntryOutput $entriesOutputs;
 
 
-    public function __construct(string $title, array $entryAndOutput)
+    public function __construct(string $title)
     {
         $this->challengeTitle = $title;
 
-        foreach ($entryAndOutput as $entry => $output) {
-            $this->entryAndOutput[$entry] = $output;
-        }
+        $this->entriesOutputs = new EntryOutput();
     }
 
 
-    public function getChallengeInfo()
+    public function getChallengeInfo(): void
     {
-        echo "<br>" . self::$CHALLENGENUMBER . " - " . $this->challengeTitle;
+        echo "<br><br><br>";
 
         echo "<hr>";
+        echo self::$CHALLENGENUMBER . " - " . $this->challengeTitle;
         
         echo "<h2>Entry => Output</h2>";
-        foreach ($this->entryAndOutput as $entry => $output) {
+        foreach ($this->entriesOutputs->getEntriesOutputs() as $entry => $output) {
             echo "<li>". $entry . " => " . $output . "</li>";
         }
 
@@ -37,7 +37,7 @@ class Challenge
     }
 
 
-    public function getUserOutput()
+    public function getUserOutput(): mixed
     {
         return $this->userOutput;
     }
@@ -46,6 +46,17 @@ class Challenge
     public function setUserOutput(mixed $value)
     {
         $this->userOutput = $value;
+    }
+
+    public function checkUserOutput(mixed $userEntry): string
+    {
+        foreach ($this->entriesOutputs->getEntriesOutputs() as $entry => $output) {
+            if ($this->userOutput == $output && $userEntry == $entry) {
+                return "✅ Passed";
+            }
+        }
+
+        return "❌ Failed";
     }
 
 }
